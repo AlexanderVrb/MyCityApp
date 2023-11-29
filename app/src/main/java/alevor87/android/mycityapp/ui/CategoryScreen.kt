@@ -1,5 +1,6 @@
 package alevor87.android.mycityapp.ui
 
+import alevor87.android.mycityapp.data.Datasource
 import alevor87.android.mycityapp.ui.theme.MyCityAppTheme
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -18,15 +19,16 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 fun CategoryScreen(
     myCityViewModel: MyCityViewModel = viewModel()
 ) {
-    val myCityUiState by myCityViewModel.uiState.collectAsState()
     Scaffold(
         topBar = {
-            MyCityAppBar(info = myCityUiState.listOfTheaterObjects[1], starterScreen = false)
+            MyCityAppBar(info = Datasource.infoForSmallCards[1],
+                starterScreen = false)
         }
     ) {it ->
         LazyColumn(contentPadding = it) {
-            items(myCityUiState.listOfTheaterObjects) { listOfTheaterObjects ->
-                SmallCard(cardInfo = listOfTheaterObjects)
+            items(Datasource.infoForSmallCards.slice(0..1)) {
+                    it ->
+                SmallCard(cardInfo = it)
             }
         }
     }

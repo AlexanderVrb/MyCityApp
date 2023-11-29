@@ -1,5 +1,6 @@
 package alevor87.android.mycityapp
 
+import alevor87.android.mycityapp.data.Datasource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import alevor87.android.mycityapp.ui.MyCityAppBar
 import alevor87.android.mycityapp.ui.MyCityViewModel
@@ -31,14 +32,10 @@ import androidx.navigation.compose.rememberNavController
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyCityApp(
-    myCityViewModel: MyCityViewModel = viewModel(),
-    navController: NavHostController = rememberNavController(),
 ) {
-    val myCityUiState by myCityViewModel.uiState.collectAsState()
-
     Scaffold(
         topBar = {
-            MyCityAppBar(info = myCityUiState.categoriesUi[1], starterScreen = true)
+            MyCityAppBar(info = Datasource.categoryCards[1], starterScreen = true)
         }
     ) { innerPadding ->
         MyCityScreen(contentPadding = innerPadding)
@@ -49,13 +46,11 @@ fun MyCityApp(
 @Composable
 fun MyCityScreen(
     contentPadding: PaddingValues,
-    myCityViewModel: MyCityViewModel = viewModel()
 ) {
-    val myCityUiState by myCityViewModel.uiState.collectAsState()
     LazyColumn(contentPadding = contentPadding) {
-        items(myCityUiState.categoriesUi) { categoriesUi ->
+        items(Datasource.categoryCards) { it ->
             SmallCard(
-                cardInfo = categoriesUi,
+                cardInfo = it
             )
         }
     }

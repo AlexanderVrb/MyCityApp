@@ -16,7 +16,8 @@ import androidx.compose.ui.res.stringResource
 @Composable
 fun MyCityAppBar(info: SmallCards,
                  starterScreen: Boolean = true,
-                 modifier: Modifier = Modifier) {
+                 modifier: Modifier = Modifier
+) {
     CenterAlignedTopAppBar(
         title = {
             Row(
