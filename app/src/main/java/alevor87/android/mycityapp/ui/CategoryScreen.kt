@@ -1,6 +1,7 @@
 package alevor87.android.mycityapp.ui
 
 import alevor87.android.mycityapp.data.Datasource
+import alevor87.android.mycityapp.data.Datasource.infoForSmallCards
 import alevor87.android.mycityapp.ui.theme.MyCityAppTheme
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -17,7 +18,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CategoryScreen(
-    myCityViewModel: MyCityViewModel = viewModel()
+    onClick: () -> Unit,
+    categoryIndex: Int
 ) {
     Scaffold(
         topBar = {
@@ -26,24 +28,33 @@ fun CategoryScreen(
         }
     ) {it ->
         LazyColumn(contentPadding = it) {
-            items(Datasource.infoForSmallCards.slice(0..1)) {
+            items(when (categoryIndex) {
+                1 -> infoForSmallCards.slice(2..3)
+                2 -> infoForSmallCards.slice(4..5)
+                else -> infoForSmallCards.slice(0..1)
+
+            }
+                    ) {
                     it ->
-                SmallCard(cardInfo = it)
+                SmallCard(
+                    cardInfo = it,
+                    onClick = onClick,
+                    clickIndex = {1})
             }
         }
     }
 }
 
-@Preview
-@Composable
-fun CategoryScreenPreview() {
-    MyCityAppTheme {
-        Surface(
-            color = MaterialTheme.colorScheme.background
-        ) {
-            CategoryScreen()
-        }
-    }
-}
+//@Preview
+//@Composable
+//fun CategoryScreenPreview() {
+//    MyCityAppTheme {
+//        Surface(
+//            color = MaterialTheme.colorScheme.background
+//        ) {
+//            CategoryScreen()
+//        }
+//    }
+//}
 
 

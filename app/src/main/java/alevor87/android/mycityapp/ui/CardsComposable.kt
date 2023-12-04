@@ -6,6 +6,7 @@ import alevor87.android.mycityapp.data.Datasource.infoForSmallCards
 import alevor87.android.mycityapp.data.SmallCards
 import alevor87.android.mycityapp.ui.theme.MyCityAppTheme
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -18,6 +19,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -39,19 +41,29 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun SmallCard(cardInfo: SmallCards,
-              modifier: Modifier = Modifier
+fun SmallCard(
+    cardInfo: SmallCards,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    clickIndex: (SmallCards) -> Unit,
 ) {
+    fun clickIndexFun() {
+        clickIndex(cardInfo)
+        onClick
+    }
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
             .sizeIn(minHeight = 16.dp)
+            .clickable { clickIndexFun() }
+            .clickable(onClick = onClick)
     ) {
         Box(
             modifier = Modifier
                 .size(100.dp)
                 .clip(RoundedCornerShape(8.dp))
+//                .clickable(onClick = onClick)
         ) {
             Image(
                 painter = painterResource(cardInfo.picture),
@@ -66,6 +78,7 @@ fun SmallCard(cardInfo: SmallCards,
                 text = stringResource(cardInfo.title),
                 fontSize = 24.sp,
                 modifier = Modifier.padding(32.dp)
+//                    .clickable(onClick = { clickIndexFun() })
             )
         }
     }
@@ -103,17 +116,17 @@ fun BigCard(
     }
 }
 
-@Preview
-@Composable
-fun SmallCardPreview() {
-    MyCityAppTheme {
-        Surface(
-            color = MaterialTheme.colorScheme.background
-        ) {
-            SmallCard(infoForSmallCards[1])
-        }
-    }
-}
+//@Preview
+//@Composable
+//fun SmallCardPreview() {
+//    MyCityAppTheme {
+//        Surface(
+//            color = MaterialTheme.colorScheme.background
+//        ) {
+//            SmallCard(infoForSmallCards[1])
+//        }
+//    }
+//}
 
 @Preview
 @Composable

@@ -6,9 +6,10 @@ import alevor87.android.mycityapp.data.Datasource.infoForSmallCards
 import java.util.EventObject
 
 data class MyCityUiState(
-    var categoriesUi: List<SmallCards> = categoryCards,
-    var objectsUi: List<Triple<Int, Int, Int>> = infoForBigCards,
-    var listOfTheaterObjects: List<SmallCards> = infoForSmallCards.slice(0..1),
-    var listOfHotelObjects: List<SmallCards> = infoForSmallCards.slice(4..5),
-    var listOfRestaurantObjects: List<SmallCards> = infoForSmallCards.slice(2..3)
+    val categoriesUi: List<SmallCards> = categoryCards,
+    val objectsUi: List<Triple<Int, Int, Int>> = infoForBigCards,
+    val listOfTheaterObjects: List<SmallCards> = infoForSmallCards.slice(0..1),
+    val listOfHotelObjects: List<SmallCards> = infoForSmallCards.slice(4..5),
+    val listOfRestaurantObjects: List<SmallCards> = infoForSmallCards.slice(2..3),
+//    var categoryIndex: Int = 1
 )
