@@ -16,15 +16,4 @@ import kotlinx.coroutines.flow.update
 class MyCityViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(MyCityUiState())
     val uiState: StateFlow<MyCityUiState> = _uiState.asStateFlow()
-
-    var categoryIndex by mutableStateOf(0)
-        private set
-
-    val updateCategoryIndex= {smallCard: SmallCards ->
-        categoryIndex = when (smallCard) {
-            categoryCards[0] -> 1
-            categoryCards[1] -> 2
-            else -> 3
-        }
-    }
 }

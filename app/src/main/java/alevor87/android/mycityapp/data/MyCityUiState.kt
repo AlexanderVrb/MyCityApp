@@ -11,5 +11,4 @@ data class MyCityUiState(
     val listOfTheaterObjects: List<SmallCards> = infoForSmallCards.slice(0..1),
     val listOfHotelObjects: List<SmallCards> = infoForSmallCards.slice(4..5),
     val listOfRestaurantObjects: List<SmallCards> = infoForSmallCards.slice(2..3),
-//    var categoryIndex: Int = 1
 )
