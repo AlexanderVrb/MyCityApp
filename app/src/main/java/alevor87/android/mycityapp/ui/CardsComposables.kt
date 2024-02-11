@@ -1,14 +1,11 @@
 package alevor87.android.mycityapp.ui
 
-import alevor87.android.mycityapp.data.Datasource.infoForBigCards
-import alevor87.android.mycityapp.data.Datasource.infoForSmallCards
-import alevor87.android.mycityapp.data.SmallCards
+import alevor87.android.mycityapp.Datasource.infoForBigCards
+import alevor87.android.mycityapp.Datasource.theatersSmallCard
+import alevor87.android.mycityapp.models.SmallCard
 import alevor87.android.mycityapp.ui.theme.MyCityAppTheme
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.scrollable
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -40,9 +37,9 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun SmallCard(
-    cardInfo: SmallCards,
-    onClick: (SmallCards) -> Unit,
-    modifier: Modifier = Modifier,
+    cardInfo: SmallCard,
+    onClick: (SmallCard) -> Unit,
+//    modifier: Modifier = Modifier,
 ) {
     Card(
         modifier = Modifier.padding(4.dp)
@@ -82,9 +79,10 @@ fun SmallCard(
 
 @Composable
 fun BigCard(
-    modifier: Modifier = Modifier,
+//    modifier: Modifier = Modifier,
     cardInfo: Triple<Int, Int, Int>,
-    contentPadding: PaddingValues = PaddingValues(16.dp),
+    contentPadding: PaddingValues,
+//  contentPadding: PaddingValues = PaddingValues(16.dp),
 ) {
     Card(
         modifier = Modifier
@@ -120,7 +118,7 @@ fun SmallCardPreview() {
             color = MaterialTheme.colorScheme.background
         ) {
             SmallCard(
-                cardInfo = infoForSmallCards[1],
+                cardInfo = theatersSmallCard[1],
                 onClick = { TODO() }
             )
         }
@@ -134,7 +132,10 @@ fun BigCardPreview() {
         Surface(
             color = MaterialTheme.colorScheme.background
         ) {
-            BigCard(cardInfo = infoForBigCards[1])
+            BigCard(
+                cardInfo = infoForBigCards[1],
+                contentPadding = PaddingValues(16.dp)
+            )
         }
     }
 }

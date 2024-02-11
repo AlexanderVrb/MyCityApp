@@ -1,7 +1,8 @@
-package alevor87.android.mycityapp.ui
+package alevor87.android.mycityapp.cityObject
 
 import alevor87.android.mycityapp.R
-import alevor87.android.mycityapp.data.Datasource.infoForBigCards
+import alevor87.android.mycityapp.Datasource.infoForBigCards
+import alevor87.android.mycityapp.ui.BigCard
 import alevor87.android.mycityapp.ui.theme.MyCityAppTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -34,7 +35,7 @@ fun ObjectScreen(
                     Icon(Icons.Default.Add, contentDescription = "Add")
                 }
             }
-        ) {
+        ) { it ->
             BigCard(cardInfo = cardInfo, contentPadding = it)
         }
     }
@@ -48,8 +49,10 @@ fun MyCityScreenPreview() {
             color = MaterialTheme.colorScheme.background
         ) {
             ObjectScreen(
-                cardInfo = infoForBigCards[1],
-                onClick = { 3 },
+                cardInfo =
+                if (infoForBigCards.size > 1) infoForBigCards[1]
+                else infoForBigCards[0],
+                onClick = { TODO() },
                 nickname = stringResource(R.string.programmers_nickname)
             )
         }

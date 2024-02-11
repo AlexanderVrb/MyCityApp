@@ -1,7 +1,9 @@
-package alevor87.android.mycityapp.ui
+package alevor87.android.mycityapp.cityObjects
 
-import alevor87.android.mycityapp.data.Datasource
-import alevor87.android.mycityapp.data.SmallCards
+import alevor87.android.mycityapp.Datasource
+import alevor87.android.mycityapp.Datasource.theatersSmallCard
+import alevor87.android.mycityapp.models.SmallCard
+import alevor87.android.mycityapp.ui.SmallCard
 import alevor87.android.mycityapp.ui.theme.MyCityAppTheme
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -18,8 +20,8 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ObjectsScreen(
-    smallCards: List<SmallCards>,
-    onClick: (SmallCards) -> Unit,
+    smallCards: List<SmallCard>,
+    onClick: (SmallCard) -> Unit,
 ) {
     Scaffold(
         modifier = Modifier.padding(vertical = 12.dp)
@@ -43,7 +45,7 @@ fun ObjectsScreenPreview() {
             color = MaterialTheme.colorScheme.background
         ) {
             ObjectsScreen(
-                smallCards = Datasource.infoForSmallCards.slice(0..1),
+                smallCards = theatersSmallCard,
                 onClick = { TODO("A Filler") },
             )
         }
