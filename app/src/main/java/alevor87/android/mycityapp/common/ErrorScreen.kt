@@ -1,4 +1,4 @@
-package alevor87.android.mycityapp.ui
+package alevor87.android.mycityapp.common
 
 import alevor87.android.mycityapp.R
 import androidx.compose.foundation.layout.Arrangement

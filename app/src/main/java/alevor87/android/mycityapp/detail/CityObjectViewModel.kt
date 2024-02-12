@@ -1,4 +1,4 @@
-package alevor87.android.mycityapp.cityObject
+package alevor87.android.mycityapp.detail
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

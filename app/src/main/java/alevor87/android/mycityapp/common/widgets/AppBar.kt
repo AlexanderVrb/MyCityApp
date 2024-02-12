@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package alevor87.android.mycityapp.ui
+package alevor87.android.mycityapp.common.widgets
 
 import alevor87.android.mycityapp.navigation.MyCityScreen
 import androidx.compose.material.icons.Icons

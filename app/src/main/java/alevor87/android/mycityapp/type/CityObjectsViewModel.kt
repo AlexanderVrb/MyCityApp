@@ -1,4 +1,4 @@
-package alevor87.android.mycityapp.cityObjects
+package alevor87.android.mycityapp.type
 
 import alevor87.android.mycityapp.models.SmallCard
 import alevor87.android.mycityapp.navigation.MyCityScreen

@@ -1,8 +1,8 @@
-package alevor87.android.mycityapp.cityObject
+package alevor87.android.mycityapp.detail
 
+import alevor87.android.mycityapp.Datasource.bigTheater
 import alevor87.android.mycityapp.R
-import alevor87.android.mycityapp.Datasource.infoForBigCards
-import alevor87.android.mycityapp.ui.BigCard
+import alevor87.android.mycityapp.common.BigCard
 import alevor87.android.mycityapp.ui.theme.MyCityAppTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -50,8 +50,7 @@ fun MyCityScreenPreview() {
         ) {
             ObjectScreen(
                 cardInfo =
-                if (infoForBigCards.size > 1) infoForBigCards[1]
-                else infoForBigCards[0],
+                bigTheater,
                 onClick = { TODO() },
                 nickname = stringResource(R.string.programmers_nickname)
             )

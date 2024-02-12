@@ -1,14 +1,14 @@
 package alevor87.android.mycityapp.navigation
 
-import alevor87.android.mycityapp.cityHome.CityHomeScreen
-import alevor87.android.mycityapp.cityHome.CityHomeUiState
-import alevor87.android.mycityapp.cityObject.CityObjectUiState
+import alevor87.android.mycityapp.main.CityHomeScreen
+import alevor87.android.mycityapp.main.CityHomeUiState
+import alevor87.android.mycityapp.detail.CityObjectUiState
 import alevor87.android.mycityapp.R
 import alevor87.android.mycityapp.models.SmallCard
-import alevor87.android.mycityapp.cityObject.ObjectScreen
-import alevor87.android.mycityapp.cityObjects.CityObjectsUiState
-import alevor87.android.mycityapp.cityObjects.ObjectsScreen
-import alevor87.android.mycityapp.ui.ErrorScreen
+import alevor87.android.mycityapp.detail.ObjectScreen
+import alevor87.android.mycityapp.type.CityObjectsUiState
+import alevor87.android.mycityapp.type.ObjectsScreen
+import alevor87.android.mycityapp.common.ErrorScreen
 import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.layout.PaddingValues
@@ -20,18 +20,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-
 
 @Composable
 fun Navigation(
-    navHostController: NavHostController = rememberNavController(),
+    navHostController: NavHostController,
     cityHomeUiState: CityHomeUiState,
     cityObjectsUiState: CityObjectsUiState,
     cityObjectUiState: CityObjectUiState,
     objectSelector: (SmallCard) -> String,
     objectsSelector: (SmallCard) -> String,
-    innerPadding: PaddingValues
+    innerPadding: PaddingValues,
 ) {
     NavHost(
         navController = navHostController,
@@ -40,32 +38,36 @@ fun Navigation(
     ) {
         composable(route = MyCityScreen.Start.name) {
             CityHomeScreen(
+                navHostController = navHostController,
                 onClick = { smallCard: SmallCard ->
-                    navHostController.navigate(objectsSelector(smallCard))
+                    objectsSelector(smallCard)
                 },
                 cardsInfo = cityHomeUiState.cityCategories
             )
         }
         composable(route = MyCityScreen.Theaters.name) {
             ObjectsScreen(
+                navHostController = navHostController,
                 onClick = { smallCard: SmallCard ->
-                    navHostController.navigate(objectSelector(smallCard))
+                    objectSelector(smallCard)
                 },
                 smallCards = cityObjectsUiState.listOfTheaterObjects,
             )
         }
         composable(route = MyCityScreen.Restaurants.name) {
             ObjectsScreen(
+                navHostController = navHostController,
                 onClick = { smallCard: SmallCard ->
-                            navHostController.navigate(objectSelector(smallCard))
+                    objectSelector(smallCard)
                 },
                 smallCards = cityObjectsUiState.listOfRestaurantObjects,
             )
         }
         composable(route = MyCityScreen.Hotels.name) {
             ObjectsScreen(
+                navHostController = navHostController,
                 onClick = { smallCard: SmallCard ->
-                            navHostController.navigate(objectSelector(smallCard))
+                    objectSelector(smallCard)
                 },
                 smallCards = cityObjectsUiState.listOfHotelObjects,
             )
@@ -113,7 +115,7 @@ fun Navigation(
         composable(route = MyCityScreen.Intermark.name) {
             val context = LocalContext.current
             ObjectScreen(
-                cardInfo = cityObjectUiState.inermarkResidence,
+                cardInfo = cityObjectUiState.intermarkResidence,
                 onClick = { text: String -> shareInfo(context, text = text) },
                 nickname = stringResource(id = R.string.programmers_nickname)
             )

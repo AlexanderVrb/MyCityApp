@@ -1,12 +1,12 @@
 package alevor87.android.mycityapp
 
-import alevor87.android.mycityapp.cityHome.CityHomeUiState
-import alevor87.android.mycityapp.cityHome.CityHomeViewModel
-import alevor87.android.mycityapp.cityObject.CityObjectUiState
-import alevor87.android.mycityapp.cityObject.CityObjectViewModel
-import alevor87.android.mycityapp.cityObjects.CityObjectsUiState
-import alevor87.android.mycityapp.cityObjects.CityObjectsViewModel
-import alevor87.android.mycityapp.ui.MyCityAppBar
+import alevor87.android.mycityapp.main.CityHomeUiState
+import alevor87.android.mycityapp.main.CityHomeViewModel
+import alevor87.android.mycityapp.detail.CityObjectUiState
+import alevor87.android.mycityapp.detail.CityObjectViewModel
+import alevor87.android.mycityapp.type.CityObjectsUiState
+import alevor87.android.mycityapp.type.CityObjectsViewModel
+import alevor87.android.mycityapp.common.widgets.MyCityAppBar
 import alevor87.android.mycityapp.navigation.MyCityScreen
 import alevor87.android.mycityapp.navigation.Navigation
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -47,8 +47,8 @@ fun MyCityApp(
             )
         }
     ) { innerPadding ->
-
         Navigation(
+            navHostController = navHostController,
             cityHomeUiState = cityHomeUiState,
             cityObjectsUiState = cityObjectsUiState,
             cityObjectUiState = cityObjectUiState,

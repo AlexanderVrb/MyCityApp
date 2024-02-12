@@ -1,6 +1,6 @@
-package alevor87.android.mycityapp.ui
+package alevor87.android.mycityapp.common
 
-import alevor87.android.mycityapp.Datasource.infoForBigCards
+import alevor87.android.mycityapp.Datasource.bigTheater
 import alevor87.android.mycityapp.Datasource.theatersSmallCard
 import alevor87.android.mycityapp.models.SmallCard
 import alevor87.android.mycityapp.ui.theme.MyCityAppTheme
@@ -34,11 +34,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun SmallCard(
+    navHostController: NavHostController,
     cardInfo: SmallCard,
-    onClick: (SmallCard) -> Unit,
+    onClick: (SmallCard) -> String,
 //    modifier: Modifier = Modifier,
 ) {
     Card(
@@ -49,7 +52,7 @@ fun SmallCard(
                 .fillMaxWidth()
                 .padding(16.dp)
                 .sizeIn(minHeight = 16.dp)
-                .clickable { onClick(cardInfo) }
+                .clickable { navHostController.navigate(onClick(cardInfo)) }
         ) {
             Box(
                 modifier = Modifier
@@ -79,7 +82,7 @@ fun SmallCard(
 
 @Composable
 fun BigCard(
-//    modifier: Modifier = Modifier,
+//  modifier: Modifier = Modifier,
     cardInfo: Triple<Int, Int, Int>,
     contentPadding: PaddingValues,
 //  contentPadding: PaddingValues = PaddingValues(16.dp),
@@ -118,6 +121,7 @@ fun SmallCardPreview() {
             color = MaterialTheme.colorScheme.background
         ) {
             SmallCard(
+                navHostController = rememberNavController(),
                 cardInfo = theatersSmallCard[1],
                 onClick = { TODO() }
             )
@@ -133,7 +137,7 @@ fun BigCardPreview() {
             color = MaterialTheme.colorScheme.background
         ) {
             BigCard(
-                cardInfo = infoForBigCards[1],
+                cardInfo = bigTheater,
                 contentPadding = PaddingValues(16.dp)
             )
         }
