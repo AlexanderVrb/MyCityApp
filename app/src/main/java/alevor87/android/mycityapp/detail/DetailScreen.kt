@@ -3,6 +3,7 @@ package alevor87.android.mycityapp.detail
 import alevor87.android.mycityapp.Datasource.bigTheater
 import alevor87.android.mycityapp.R
 import alevor87.android.mycityapp.common.BigCard
+import alevor87.android.mycityapp.models.BigCard
 import alevor87.android.mycityapp.ui.theme.MyCityAppTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -23,8 +24,8 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ObjectScreen(
-    cardInfo: Triple<Int, Int, Int>,
+fun DetailScreen(
+    bigCard: BigCard,
     onClick: (String) -> Unit,
     nickname: String,
 ) {
@@ -36,20 +37,20 @@ fun ObjectScreen(
                 }
             }
         ) { it ->
-            BigCard(cardInfo = cardInfo, contentPadding = it)
+            BigCard(bigCard = bigCard, contentPadding = it)
         }
     }
 }
 
 @Preview
 @Composable
-fun MyCityScreenPreview() {
+fun DetailScreenPreview() {
     MyCityAppTheme {
         Surface(
             color = MaterialTheme.colorScheme.background
         ) {
-            ObjectScreen(
-                cardInfo =
+            DetailScreen(
+                bigCard =
                 bigTheater,
                 onClick = { TODO() },
                 nickname = stringResource(R.string.programmers_nickname)

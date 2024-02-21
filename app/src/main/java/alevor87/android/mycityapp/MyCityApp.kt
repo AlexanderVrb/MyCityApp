@@ -1,11 +1,11 @@
 package alevor87.android.mycityapp
 
-import alevor87.android.mycityapp.main.CityHomeUiState
-import alevor87.android.mycityapp.main.CityHomeViewModel
-import alevor87.android.mycityapp.detail.CityObjectUiState
-import alevor87.android.mycityapp.detail.CityObjectViewModel
-import alevor87.android.mycityapp.type.CityObjectsUiState
-import alevor87.android.mycityapp.type.CityObjectsViewModel
+import alevor87.android.mycityapp.main.MainUiState
+import alevor87.android.mycityapp.main.MainViewModel
+import alevor87.android.mycityapp.detail.DetailUiState
+import alevor87.android.mycityapp.detail.DetailViewModel
+import alevor87.android.mycityapp.type.TypeUiState
+import alevor87.android.mycityapp.type.TypeViewModel
 import alevor87.android.mycityapp.common.widgets.MyCityAppBar
 import alevor87.android.mycityapp.navigation.MyCityScreen
 import alevor87.android.mycityapp.navigation.Navigation
@@ -23,15 +23,15 @@ import androidx.navigation.compose.rememberNavController
 @Composable
 fun MyCityApp(
     navHostController: NavHostController = rememberNavController(),
-    cityHomeViewModel: CityHomeViewModel = viewModel(),
-    cityObjectsViewModel: CityObjectsViewModel = viewModel(),
-    cityObjectViewModel: CityObjectViewModel = viewModel(),
+    mainViewModel: MainViewModel = viewModel(),
+    typeViewModel: TypeViewModel = viewModel(),
+    detailViewModel: DetailViewModel = viewModel(),
 ) {
-    val cityHomeUiState: CityHomeUiState by cityHomeViewModel.uiState.collectAsState()
+    val mainUiState: MainUiState by mainViewModel.uiState.collectAsState()
 
-    val cityObjectsUiState: CityObjectsUiState by cityObjectsViewModel.uiState.collectAsState()
+    val typeUiState: TypeUiState by typeViewModel.uiState.collectAsState()
 
-    val cityObjectUiState: CityObjectUiState by cityObjectViewModel.uiState.collectAsState()
+    val detailUiState: DetailUiState by detailViewModel.uiState.collectAsState()
 
     val backStackEntry by navHostController.currentBackStackEntryAsState()
 
@@ -49,12 +49,14 @@ fun MyCityApp(
     ) { innerPadding ->
         Navigation(
             navHostController = navHostController,
-            cityHomeUiState = cityHomeUiState,
-            cityObjectsUiState = cityObjectsUiState,
-            cityObjectUiState = cityObjectUiState,
-            objectSelector = cityObjectsViewModel.objectSelector,
-            objectsSelector = cityHomeViewModel.objectsSelector,
-            innerPadding = innerPadding
+            mainUiState = mainUiState,
+            typeUiState = typeUiState,
+            cityObjectUiState = detailUiState,
+            typeNavigationSelector = typeViewModel.detailNavigationSelector,
+            detailNavigationSelector = mainViewModel.typeNavigationSelector,
+            innerPadding = innerPadding,
+            updateTypeUiState = typeViewModel.updateTypeUi,
+            updateDetailUi = detailViewModel.updateDetailUi
         )
     }
 }

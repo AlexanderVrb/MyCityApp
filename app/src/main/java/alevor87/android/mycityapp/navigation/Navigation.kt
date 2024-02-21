@@ -1,13 +1,13 @@
 package alevor87.android.mycityapp.navigation
 
-import alevor87.android.mycityapp.main.CityHomeScreen
-import alevor87.android.mycityapp.main.CityHomeUiState
-import alevor87.android.mycityapp.detail.CityObjectUiState
+import alevor87.android.mycityapp.main.MainScreen
+import alevor87.android.mycityapp.main.MainUiState
+import alevor87.android.mycityapp.detail.DetailUiState
 import alevor87.android.mycityapp.R
 import alevor87.android.mycityapp.models.SmallCard
-import alevor87.android.mycityapp.detail.ObjectScreen
-import alevor87.android.mycityapp.type.CityObjectsUiState
-import alevor87.android.mycityapp.type.ObjectsScreen
+import alevor87.android.mycityapp.detail.DetailScreen
+import alevor87.android.mycityapp.type.TypeUiState
+import alevor87.android.mycityapp.type.TypeScreen
 import alevor87.android.mycityapp.common.ErrorScreen
 import android.content.Context
 import android.content.Intent
@@ -24,11 +24,13 @@ import androidx.navigation.compose.composable
 @Composable
 fun Navigation(
     navHostController: NavHostController,
-    cityHomeUiState: CityHomeUiState,
-    cityObjectsUiState: CityObjectsUiState,
-    cityObjectUiState: CityObjectUiState,
-    objectSelector: (SmallCard) -> String,
-    objectsSelector: (SmallCard) -> String,
+    mainUiState: MainUiState,
+    typeUiState: TypeUiState,
+    cityObjectUiState: DetailUiState,
+    typeNavigationSelector: (SmallCard) -> String,
+    updateTypeUiState: (Int) -> Unit,
+    detailNavigationSelector: (SmallCard) -> String,
+    updateDetailUi: (Int) -> Unit,
     innerPadding: PaddingValues,
 ) {
     NavHost(
@@ -37,85 +39,93 @@ fun Navigation(
         modifier = Modifier.padding(innerPadding)
     ) {
         composable(route = MyCityScreen.Start.name) {
-            CityHomeScreen(
+            MainScreen(
                 navHostController = navHostController,
                 onClick = { smallCard: SmallCard ->
-                    objectsSelector(smallCard)
+                    detailNavigationSelector(smallCard)
                 },
-                cardsInfo = cityHomeUiState.cityCategories
+                cardsInfo = mainUiState.cityCategories,
+                updateTypeUiState = updateTypeUiState
+
             )
         }
         composable(route = MyCityScreen.Theaters.name) {
-            ObjectsScreen(
+            TypeScreen(
                 navHostController = navHostController,
                 onClick = { smallCard: SmallCard ->
-                    objectSelector(smallCard)
+                    typeNavigationSelector(smallCard)
                 },
-                smallCards = cityObjectsUiState.listOfTheaterObjects,
+                smallCards = typeUiState.listOfTypeDetails,
+                typeName = R.string.theaters,
+                updateTypeUiState = updateDetailUi
             )
         }
         composable(route = MyCityScreen.Restaurants.name) {
-            ObjectsScreen(
+            TypeScreen(
                 navHostController = navHostController,
                 onClick = { smallCard: SmallCard ->
-                    objectSelector(smallCard)
+                    typeNavigationSelector(smallCard)
                 },
-                smallCards = cityObjectsUiState.listOfRestaurantObjects,
+                smallCards = typeUiState.listOfTypeDetails,
+                typeName = R.string.restaurants,
+                updateTypeUiState = updateDetailUi
             )
         }
         composable(route = MyCityScreen.Hotels.name) {
-            ObjectsScreen(
+            TypeScreen(
                 navHostController = navHostController,
                 onClick = { smallCard: SmallCard ->
-                    objectSelector(smallCard)
+                    typeNavigationSelector(smallCard)
                 },
-                smallCards = cityObjectsUiState.listOfHotelObjects,
+                smallCards = typeUiState.listOfTypeDetails,
+                typeName = R.string.hotels,
+                updateTypeUiState = updateDetailUi
             )
         }
         composable(route = MyCityScreen.BigTheater.name) {
             val context = LocalContext.current
-            ObjectScreen(
-                cardInfo = cityObjectUiState.bigTheater,
+            DetailScreen(
+                bigCard = cityObjectUiState.detail,
                 onClick = { text: String -> shareInfo(context, text = text) },
                 nickname = stringResource(id = R.string.programmers_nickname)
             )
         }
         composable(route = MyCityScreen.ModernTheater.name) {
             val context = LocalContext.current
-            ObjectScreen(
-                cardInfo = cityObjectUiState.modernTheater,
+            DetailScreen(
+                bigCard = cityObjectUiState.detail,
                 onClick = { text: String -> shareInfo(context, text = text) },
                 nickname = stringResource(id = R.string.programmers_nickname)
             )
         }
         composable(route = MyCityScreen.SaborDeLaVida.name) {
             val context = LocalContext.current
-            ObjectScreen(
-                cardInfo = cityObjectUiState.saborDeLaVida,
+            DetailScreen(
+                bigCard = cityObjectUiState.detail,
                 onClick = { text: String -> shareInfo(context, text = text) },
                 nickname = stringResource(id = R.string.programmers_nickname)
             )
         }
         composable(route = MyCityScreen.Anderson.name) {
             val context = LocalContext.current
-            ObjectScreen(
-                cardInfo = cityObjectUiState.anderson,
+            DetailScreen(
+                bigCard = cityObjectUiState.detail,
                 onClick = { text: String -> shareInfo(context, text = text) },
                 nickname = stringResource(id = R.string.programmers_nickname)
             )
         }
         composable(route = MyCityScreen.Stoleshnikov.name) {
             val context = LocalContext.current
-            ObjectScreen(
-                cardInfo = cityObjectUiState.stoleshnikov,
+            DetailScreen(
+                bigCard = cityObjectUiState.detail,
                 onClick = { text: String -> shareInfo(context, text = text) },
                 nickname = stringResource(id = R.string.programmers_nickname)
             )
         }
         composable(route = MyCityScreen.Intermark.name) {
             val context = LocalContext.current
-            ObjectScreen(
-                cardInfo = cityObjectUiState.intermarkResidence,
+            DetailScreen(
+                bigCard = cityObjectUiState.detail,
                 onClick = { text: String -> shareInfo(context, text = text) },
                 nickname = stringResource(id = R.string.programmers_nickname)
             )

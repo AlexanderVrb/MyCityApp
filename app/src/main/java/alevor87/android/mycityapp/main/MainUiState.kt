@@ -5,9 +5,6 @@ import alevor87.android.mycityapp.Datasource
 import alevor87.android.mycityapp.Datasource.categoryCards
 import alevor87.android.mycityapp.models.SmallCard
 
-data class CityHomeUiState(
-    val restaurantCategory: SmallCard = Datasource.restaurantCategory,
-    val hotelCategory: SmallCard = Datasource.hotelCategory,
-    val theaterCategory: SmallCard = Datasource.theaterCategory,
+data class MainUiState(
     val cityCategories: List<SmallCard> = categoryCards
 )

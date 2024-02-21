@@ -17,10 +17,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun CityHomeScreen(
+fun MainScreen(
     navHostController: NavHostController,
     cardsInfo: List<SmallCard>,
     onClick: (SmallCard) -> String,
+    updateTypeUiState: (Int) -> Unit
 ) {
     LazyColumn(
         modifier = Modifier.padding(vertical = 12.dp)
@@ -29,25 +30,26 @@ fun CityHomeScreen(
             SmallCard(
                 navHostController = navHostController,
                 cardInfo = it,
-                onClick = onClick
+                onClick = onClick,
+                updateTypeUiState = updateTypeUiState
             )
         }
     }
 }
 
 
-@Preview
-@Composable
-fun CityHomeScreenPreview() {
-    MyCityAppTheme {
-        Surface(
-            color = MaterialTheme.colorScheme.background
-        ) {
-            CityHomeScreen(
-                navHostController = rememberNavController(),
-                cardsInfo = Datasource.categoryCards,
-                onClick = { TODO() }
-            )
-        }
-    }
-}
+//@Preview
+//@Composable
+//fun MainScreenPreview() {
+//    MyCityAppTheme {
+//        Surface(
+//            color = MaterialTheme.colorScheme.background
+//        ) {
+//            MainScreen(
+//                navHostController = rememberNavController(),
+//                cardsInfo = Datasource.categoryCards,
+//                onClick = { TODO() }
+//            )
+//        }
+//    }
+//}

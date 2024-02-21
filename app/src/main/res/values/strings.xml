@@ -4,6 +4,7 @@
     <string name="restaurants">Рестораны</string>
     <string name="theaters">Театры</string>
     <string name="hotels">Отели</string>
+    <string name="type_not_found">Тип не найден!</string>
     <string name="big_theater_name">Большой театр</string>
     <string name="big_theater_description">Государственный академический Большой театр России, Большой театр России или просто Большой театр — один из крупнейших в России и один из самых значительных в мире театров оперы и балета. Комплекс зданий театра расположен в центре Москвы, на Театральной площади. Большой театр, его музей, здание исторической сцены — объект культурного наследия народов России федерального значения.</string>
     <string name="modern_theater_name">Театр "Модерн"</string>
@@ -21,4 +22,5 @@
     <string name="save_button_text">Save programmer\'s nickname!</string>
     <string name="programmers_nickname">alevor87</string>
     <string name="error_message">Ошибка! Такой экран не существует</string>
+    <string name="detail_error_message">Ошибка! Объект не найден!</string>
 </resources>
