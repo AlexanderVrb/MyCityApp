@@ -2,7 +2,6 @@
 
 package alevor87.android.mycityapp.common.widgets
 
-import alevor87.android.mycityapp.navigation.MyCityScreen
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -21,14 +20,14 @@ import androidx.compose.ui.text.style.TextAlign
 @Composable
 fun MyCityAppBar(
     modifier: Modifier = Modifier,
-    currentScreen: MyCityScreen,
+    currentScreen: String,
     canNavigateBack: Boolean,
     navigateUp: () -> Unit = {},
 ) {
     TopAppBar(
         title = {
             Text(
-                stringResource(currentScreen.title),
+                currentScreen,
                 textAlign = TextAlign.Center
             )
         },

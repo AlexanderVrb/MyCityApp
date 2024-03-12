@@ -1,14 +1,10 @@
 package alevor87.android.mycityapp.navigation
 
 import alevor87.android.mycityapp.main.MainScreen
-import alevor87.android.mycityapp.main.MainUiState
-import alevor87.android.mycityapp.detail.DetailUiState
 import alevor87.android.mycityapp.R
-import alevor87.android.mycityapp.models.SmallCard
-import alevor87.android.mycityapp.detail.DetailScreen
-import alevor87.android.mycityapp.type.TypeUiState
-import alevor87.android.mycityapp.type.TypeScreen
 import alevor87.android.mycityapp.common.ErrorScreen
+import alevor87.android.mycityapp.detail.DetailScreen
+import alevor87.android.mycityapp.type.TypeScreen
 import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.layout.PaddingValues
@@ -24,113 +20,33 @@ import androidx.navigation.compose.composable
 @Composable
 fun Navigation(
     navHostController: NavHostController,
-    mainUiState: MainUiState,
-    typeUiState: TypeUiState,
-    cityObjectUiState: DetailUiState,
-    typeNavigationSelector: (SmallCard) -> String,
-    updateTypeUiState: (Int) -> Unit,
-    detailNavigationSelector: (SmallCard) -> String,
-    updateDetailUi: (Int) -> Unit,
     innerPadding: PaddingValues,
 ) {
     NavHost(
         navController = navHostController,
-        startDestination = MyCityScreen.Start.name,
+        startDestination = "start",
         modifier = Modifier.padding(innerPadding)
     ) {
-        composable(route = MyCityScreen.Start.name) {
+        composable(route = "start") {
             MainScreen(
                 navHostController = navHostController,
-                onClick = { smallCard: SmallCard ->
-                    detailNavigationSelector(smallCard)
-                },
-                cardsInfo = mainUiState.cityCategories,
-                updateTypeUiState = updateTypeUiState
-
-            )
+                )
         }
-        composable(route = MyCityScreen.Theaters.name) {
+        composable(route = "type/{typeId}") {
             TypeScreen(
+                typeId = it.arguments?.getString("typeId"),
                 navHostController = navHostController,
-                onClick = { smallCard: SmallCard ->
-                    typeNavigationSelector(smallCard)
-                },
-                smallCards = typeUiState.listOfTypeDetails,
-                typeName = R.string.theaters,
-                updateTypeUiState = updateDetailUi
             )
         }
-        composable(route = MyCityScreen.Restaurants.name) {
-            TypeScreen(
-                navHostController = navHostController,
-                onClick = { smallCard: SmallCard ->
-                    typeNavigationSelector(smallCard)
-                },
-                smallCards = typeUiState.listOfTypeDetails,
-                typeName = R.string.restaurants,
-                updateTypeUiState = updateDetailUi
-            )
-        }
-        composable(route = MyCityScreen.Hotels.name) {
-            TypeScreen(
-                navHostController = navHostController,
-                onClick = { smallCard: SmallCard ->
-                    typeNavigationSelector(smallCard)
-                },
-                smallCards = typeUiState.listOfTypeDetails,
-                typeName = R.string.hotels,
-                updateTypeUiState = updateDetailUi
-            )
-        }
-        composable(route = MyCityScreen.BigTheater.name) {
+        composable(route = "detail/{detailId}") {
             val context = LocalContext.current
             DetailScreen(
-                bigCard = cityObjectUiState.detail,
-                onClick = { text: String -> shareInfo(context, text = text) },
+                detailId = it.arguments?.getString("detailId"),
+                onClick =  { text: String -> shareInfo(context, text = text) },
                 nickname = stringResource(id = R.string.programmers_nickname)
             )
         }
-        composable(route = MyCityScreen.ModernTheater.name) {
-            val context = LocalContext.current
-            DetailScreen(
-                bigCard = cityObjectUiState.detail,
-                onClick = { text: String -> shareInfo(context, text = text) },
-                nickname = stringResource(id = R.string.programmers_nickname)
-            )
-        }
-        composable(route = MyCityScreen.SaborDeLaVida.name) {
-            val context = LocalContext.current
-            DetailScreen(
-                bigCard = cityObjectUiState.detail,
-                onClick = { text: String -> shareInfo(context, text = text) },
-                nickname = stringResource(id = R.string.programmers_nickname)
-            )
-        }
-        composable(route = MyCityScreen.Anderson.name) {
-            val context = LocalContext.current
-            DetailScreen(
-                bigCard = cityObjectUiState.detail,
-                onClick = { text: String -> shareInfo(context, text = text) },
-                nickname = stringResource(id = R.string.programmers_nickname)
-            )
-        }
-        composable(route = MyCityScreen.Stoleshnikov.name) {
-            val context = LocalContext.current
-            DetailScreen(
-                bigCard = cityObjectUiState.detail,
-                onClick = { text: String -> shareInfo(context, text = text) },
-                nickname = stringResource(id = R.string.programmers_nickname)
-            )
-        }
-        composable(route = MyCityScreen.Intermark.name) {
-            val context = LocalContext.current
-            DetailScreen(
-                bigCard = cityObjectUiState.detail,
-                onClick = { text: String -> shareInfo(context, text = text) },
-                nickname = stringResource(id = R.string.programmers_nickname)
-            )
-        }
-        composable(route = MyCityScreen.Error.name) {
+        composable(route = "error") {
             ErrorScreen()
         }
     }

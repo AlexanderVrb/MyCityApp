@@ -7,7 +7,6 @@ import alevor87.android.mycityapp.detail.DetailViewModel
 import alevor87.android.mycityapp.type.TypeUiState
 import alevor87.android.mycityapp.type.TypeViewModel
 import alevor87.android.mycityapp.common.widgets.MyCityAppBar
-import alevor87.android.mycityapp.navigation.MyCityScreen
 import alevor87.android.mycityapp.navigation.Navigation
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -23,21 +22,11 @@ import androidx.navigation.compose.rememberNavController
 @Composable
 fun MyCityApp(
     navHostController: NavHostController = rememberNavController(),
-    mainViewModel: MainViewModel = viewModel(),
-    typeViewModel: TypeViewModel = viewModel(),
-    detailViewModel: DetailViewModel = viewModel(),
 ) {
-    val mainUiState: MainUiState by mainViewModel.uiState.collectAsState()
-
-    val typeUiState: TypeUiState by typeViewModel.uiState.collectAsState()
-
-    val detailUiState: DetailUiState by detailViewModel.uiState.collectAsState()
-
     val backStackEntry by navHostController.currentBackStackEntryAsState()
 
-    val currentScreen = MyCityScreen.valueOf(
-        backStackEntry?.destination?.route ?: MyCityScreen.Start.name
-    )
+    val currentScreen = backStackEntry?.destination?.route ?: "start"
+
     Scaffold(
         topBar = {
             MyCityAppBar(
@@ -49,14 +38,7 @@ fun MyCityApp(
     ) { innerPadding ->
         Navigation(
             navHostController = navHostController,
-            mainUiState = mainUiState,
-            typeUiState = typeUiState,
-            cityObjectUiState = detailUiState,
-            typeNavigationSelector = typeViewModel.detailNavigationSelector,
-            detailNavigationSelector = mainViewModel.typeNavigationSelector,
             innerPadding = innerPadding,
-            updateTypeUiState = typeViewModel.updateTypeUi,
-            updateDetailUi = detailViewModel.updateDetailUi
         )
     }
 }

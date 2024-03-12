@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">My city app</string>
     <string name="app_bar_app_name">Мой город - Москва</string>
+    <string name="main_screen_route">Main screen</string>
+    <string name="type_screen_route">Type screen</string>
+    <string name="detail_screen_route">Detail screen</string>
     <string name="restaurants">Рестораны</string>
     <string name="theaters">Театры</string>
     <string name="hotels">Отели</string>

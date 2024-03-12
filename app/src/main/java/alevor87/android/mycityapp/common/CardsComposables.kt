@@ -1,6 +1,7 @@
 package alevor87.android.mycityapp.common
 
 import alevor87.android.mycityapp.Datasource.bigTheater
+import alevor87.android.mycityapp.Datasource.theatersSmallCard
 import alevor87.android.mycityapp.models.BigCard
 import alevor87.android.mycityapp.models.SmallCard
 import alevor87.android.mycityapp.ui.theme.MyCityAppTheme
@@ -34,14 +35,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 
 @Composable
 fun SmallCard(
-    navHostController: NavHostController,
+    navigate: (String) -> Unit,
     cardInfo: SmallCard,
-    onClick: (SmallCard) -> String,
-    updateTypeUiState: (Int) -> Unit
 //    modifier: Modifier = Modifier,
 ) {
     Card(
@@ -53,8 +51,7 @@ fun SmallCard(
                 .padding(16.dp)
                 .sizeIn(minHeight = 16.dp)
                 .clickable {
-                    updateTypeUiState(cardInfo.title)
-                    navHostController.navigate(onClick(cardInfo))
+                    navigate(cardInfo.id)
                 }
         ) {
             Box(
@@ -82,6 +79,20 @@ fun SmallCard(
     }
 }
 
+@Preview
+@Composable
+fun SmallCardPreview() {
+    MyCityAppTheme {
+        Surface(
+            color = MaterialTheme.colorScheme.background
+        ) {
+            SmallCard(
+                cardInfo = theatersSmallCard[1],
+                navigate = { TODO() }
+            )
+        }
+    }
+}
 
 @Composable
 fun BigCard(
@@ -115,22 +126,6 @@ fun BigCard(
         }
     }
 }
-
-//@Preview
-//@Composable
-//fun SmallCardPreview() {
-//    MyCityAppTheme {
-//        Surface(
-//            color = MaterialTheme.colorScheme.background
-//        ) {
-//            SmallCard(
-//                navHostController = rememberNavController(),
-//                cardInfo = theatersSmallCard[1],
-//                onClick = { TODO() }
-//            )
-//        }
-//    }
-//}
 
 @Preview
 @Composable

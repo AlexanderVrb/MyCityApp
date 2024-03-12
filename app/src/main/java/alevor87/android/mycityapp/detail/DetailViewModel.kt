@@ -1,9 +1,7 @@
 package alevor87.android.mycityapp.detail
 
 import alevor87.android.mycityapp.Datasource
-import alevor87.android.mycityapp.R
 import alevor87.android.mycityapp.models.BigCard
-import alevor87.android.mycityapp.models.SmallCard
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,35 +12,35 @@ class DetailViewModel: ViewModel() {
     private val _uiState = MutableStateFlow(DetailUiState())
     val uiState: StateFlow<DetailUiState> = _uiState.asStateFlow()
 
-    private val detailSelector: (Int) -> BigCard = { detailName ->
-        when (detailName) {
-            R.string.big_theater_name ->
+    private val detailSelector: (String) -> BigCard = { detailId ->
+        when (detailId) {
+            "1" ->
                 Datasource.bigTheater
-            R.string.modern_theater_name ->
+            "2" ->
                 Datasource.modernTheater
-            R.string.anderson_name ->
-                Datasource.anderson
-            R.string.sabor_name ->
+            "3" ->
                 Datasource.saborDeLaVida
-            R.string.stoleshnikov_name ->
+            "4" ->
+                Datasource.anderson
+            "5" ->
                 Datasource.stoleshnikov
-            R.string.intermark_name ->
+            "6" ->
                 Datasource.intermarkResidence
             else -> Datasource.detailNotFound
         }
     }
 
     private fun baseUpdateDetailUi(
-        detailName: Int,
-        typeSelector: (Int) -> BigCard,
+        detailId: String,
+        typeSelector: (String) -> BigCard,
     ) {
         _uiState.update { detailUiState ->
             detailUiState.copy(
-                detail = typeSelector(detailName)
+                detail = typeSelector(detailId)
             )
         }
     }
 
-    val updateDetailUi: (Int) -> Unit =
-        { detailName -> baseUpdateDetailUi(detailName = detailName, typeSelector = detailSelector) }
+    fun updateDetailUi(detailId: String): Unit =
+        baseUpdateDetailUi(detailId = detailId, typeSelector = detailSelector)
 }
